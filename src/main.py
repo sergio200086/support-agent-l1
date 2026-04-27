@@ -2,6 +2,7 @@ from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.messages import SystemMessage, HumanMessage
 from tools.db_tool import get_user_profile
+from tools.ticket_creation_tool import create_jira_incident
 from langgraph.prebuilt import create_react_agent
 from langgraph.checkpoint.memory import MemorySaver
 import os
@@ -21,7 +22,7 @@ diana_prompt = (
 )
 
 memory = MemorySaver()
-tools = [get_user_profile]
+tools = [get_user_profile, create_jira_incident]
 
 agent_executor = create_react_agent(
     llm,
